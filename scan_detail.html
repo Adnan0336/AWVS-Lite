@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Scan #{{ scan.id }} — AWVS-Lite Pro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Scan #{{ scan.id }}</h1>
+        <p class="muted">{{ scan.target }}</p>
+      </div>
+      <div class="actions">
+        <a class="btn secondary" href="{{ url_for('scans.dashboard') }}">Back</a>
+        <a class="btn" href="{{ url_for('scans.pdf', scan_id=scan.id) }}">Download PDF</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Severity Summary</h2>
+        <div class="chips">
+          <span class="chip critical">Critical: {{ sev_counts["CRITICAL"] }}</span>
+          <span class="chip high">High: {{ sev_counts["HIGH"] }}</span>
+          <span class="chip medium">Medium: {{ sev_counts["MEDIUM"] }}</span>
+          <span class="chip low">Low: {{ sev_counts["LOW"] }}</span>
+          <span class="chip info">Info: {{ sev_counts["INFO"] }}</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Notes</h2>
+        <p class="muted">This tool focuses on configuration/security posture checks. Keep software patched and validate findings with your engineering team.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Findings</h2>
+      {% if findings %}
+        {% for f in findings %}
+          <div class="finding">
+            <div class="finding-head">
+              <div class="title">{{ f.title }}</div>
+              <div class="badges">
+                <span class="badge sev {{ (f.severity or 'INFO')|lower }}">{{ f.severity }}</span>
+                <span class="badge conf">{{ f.confidence }}</span>
+              </div>
+            </div>
+            <div class="meta">Rule: {{ f.rule_id }}{% if f.url %} • URL: {{ f.url }}{% endif %}</div>
+            <div class="body">
+              <p><b>Description:</b> {{ f.description }}</p>
+              <p><b>Recommendation:</b> {{ f.recommendation }}</p>
+              {% if f.evidence %}
+                <details>
+                  <summary>Evidence</summary>
+                  <pre>{{ f.evidence }}</pre>
+                </details>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="muted">No findings.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
