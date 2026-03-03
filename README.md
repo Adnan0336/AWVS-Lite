@@ -1,4 +1,4 @@
-🔐 AWVS-Lite – Automated Web Vulnerability Scanner
+ **AWVS-Lite – Automated Web Vulnerability Scanner**
 
 AWVS-Lite is a lightweight Automated Web Vulnerability Scanner designed to detect common web application security vulnerabilities such as:
 
@@ -16,8 +16,7 @@ TLS Misconfiguration
 
 The tool automatically crawls web pages, injects payloads, analyzes responses, and generates professional PDF security reports.
 
-🚀 Features
-
+**Features**
 Automated Web Crawling
 
 Payload Injection Engine
@@ -30,8 +29,7 @@ PDF Report Generation
 
 Flask-Based Web Dashboard
 
-🛠️ Technologies Used
-
+**Technologies Used**
 Python
 
 Flask
@@ -44,15 +42,14 @@ SQLite
 
 ReportLab
 
-📦 Installation
-git clone https://github.com/yourusername/AWVS-Lite.git
+ **Installation**
+git clone https://github.com/Adnan0336/AWVS-Lite.git
 cd AWVS-Lite
 pip install -r requirements.txt
 python app.py
 🧪 Testing Environment
 
-Tested on:
-
+**Tested on:**
 DVWA
 
 OWASP Juice Shop
